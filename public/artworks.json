@@ -1,0 +1,92 @@
+[
+  {
+    "id": "starry-night",
+    "title": "The Starry Night",
+    "artist": "Vincent van Gogh",
+    "year": 1889,
+    "src": "/artworks/starry-night.webp",
+    "width_px": 920,
+    "height_px": 720
+  },
+  {
+    "id": "mona-lisa",
+    "title": "Mona Lisa",
+    "artist": "Leonardo da Vinci",
+    "year": 1503,
+    "src": "/artworks/mona-lisa.webp",
+    "width_px": 800,
+    "height_px": 1200
+  },
+  {
+    "id": "scream",
+    "title": "The Scream",
+    "artist": "Edvard Munch",
+    "year": 1893,
+    "src": "/artworks/scream.webp",
+    "width_px": 900,
+    "height_px": 700
+  },
+  {
+    "id": "persistence",
+    "title": "The Persistence of Memory",
+    "artist": "Salvador Dalí",
+    "year": 1931,
+    "src": "/artworks/persistence.webp",
+    "width_px": 960,
+    "height_px": 640
+  },
+  {
+    "id": "girl-pearl",
+    "title": "Girl with a Pearl Earring",
+    "artist": "Johannes Vermeer",
+    "year": 1665,
+    "src": "/artworks/girl-pearl.webp",
+    "width_px": 850,
+    "height_px": 1000
+  },
+  {
+    "id": "sunflowers",
+    "title": "Sunflowers",
+    "artist": "Vincent van Gogh",
+    "year": 1888,
+    "src": "/artworks/sunflowers.webp",
+    "width_px": 920,
+    "height_px": 720
+  },
+  {
+    "id": "guernica",
+    "title": "Guernica",
+    "artist": "Pablo Picasso",
+    "year": 1937,
+    "src": "/artworks/guernica.webp",
+    "width_px": 1100,
+    "height_px": 500
+  },
+  {
+    "id": "last-supper",
+    "title": "The Last Supper",
+    "artist": "Leonardo da Vinci",
+    "year": 1498,
+    "src": "/artworks/last-supper.webp",
+    "width_px": 1000,
+    "height_px": 460
+  },
+  {
+    "id": "night-watch",
+    "title": "The Night Watch",
+    "artist": "Rembrandt van Rijn",
+    "year": 1642,
+    "src": "/artworks/night-watch.webp",
+    "width_px": 1200,
+    "height_px": 900
+  },
+  {
+    "id": "water-lilies",
+    "title": "Water Lilies",
+    "artist": "Claude Monet",
+    "year": 1919,
+    "src": "/artworks/water-lilies.webp",
+    "width_px": 1000,
+    "height_px": 800
+  }
+] 
