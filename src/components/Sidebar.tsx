@@ -52,7 +52,7 @@ export const Sidebar = () => {
         setArtworks(data)
         if (!currentArt) {
           // Find "The Last Supper" in the artworks array
-          const lastSupper = data.find((art) => art.id === 'last-supper')
+          const lastSupper = data.find((art: Artwork) => art.id === 'last-supper')
           // If found, set it as default, otherwise use the first artwork
           selectArt(lastSupper || data[0])
         }
