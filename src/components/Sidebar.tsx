@@ -10,7 +10,7 @@ const PARTICLE_REFERENCES = [
   { name: "Space Shuttle", velocity: 0.00003, description: "Space Shuttle orbital velocity" },
   { name: "Electron in TV", velocity: 0.3, description: "Electrons in a cathode ray tube" },
   { name: "Muon", velocity: 0.9994, description: "Cosmic ray muons" },
-  { name: "LHC Proton", velocity: 0.99999999, description: "Protons in the Large Hadron Collider" }
+  { name: "LHC Proton", velocity: 0.999999991, description: "Protons in the Large Hadron Collider" }
 ];
 
 // Format artwork title for display
@@ -25,6 +25,17 @@ const formatArtworkTitle = (title: string) => {
 
 // Format velocity for display
 const formatVelocity = (v: number) => v.toFixed(4);
+
+// Custom precision formatter to display velocities close to c with more precision
+const formatReferencePrecision = (velocity: number) => {
+  if (velocity > 0.999) {
+    return velocity.toFixed(9) + 'c';
+  } else if (velocity < 0.0001) {
+    return velocity.toExponential(6) + 'c';
+  } else {
+    return velocity.toFixed(4) + 'c';
+  }
+};
 
 export const Sidebar = () => {
   const { velocityX, velocityY, currentArt, setVelocityX, setVelocityY, selectArt } = useRelativityStore()
@@ -88,7 +99,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <div className="w-80 h-full bg-black border-r border-gray-800 shadow-2xl flex flex-col">
+    <div className="w-150 h-full bg-black border-r border-gray-800 shadow-2xl flex flex-col">
       {/* Gallery Section - Fixed height */}
       <div className="h-48 p-6 border-b border-gray-800">
         <div className="flex justify-between items-center mb-4">
@@ -175,7 +186,41 @@ export const Sidebar = () => {
             </div>
           </div>
 
-          {/* Quick Reference Section */}
+          {/* Physics Info Section */}
+          <div className="bg-white/5 rounded-xl p-6 space-y-3 border border-white/10">
+            <p className="text-sm text-gray-300">
+              |v| = {cappedTotalVelocity.toFixed(4)}c → γ = {gamma.toFixed(2)}
+            </p>
+            <p className="text-sm text-gray-300">
+              Contraction: {(1/gamma).toFixed(4)} × original size
+            </p>
+            <p className="text-sm text-gray-300">
+              Doppler factor = {dopplerFactor.toFixed(2)}
+            </p>
+            {totalVelocity > 0.001 && (
+              <div className="pt-4 mt-3 border-t border-white/10">
+                <div className="bg-gradient-to-r from-indigo-900/50 via-purple-900/50 to-indigo-900/50 p-4 rounded-lg border border-indigo-500/30 shadow-lg shadow-purple-900/20 transform transition-all duration-500 hover:scale-[1.02]">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="bg-indigo-600 rounded-full p-1.5 flex items-center justify-center">
+                      <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    </div>
+                    <h4 className="text-sm font-bold text-white tracking-wide">Relativistic Perspective</h4>
+                  </div>
+                  <p className="text-sm font-medium text-white/90 mb-1.5">
+                    You&apos;re viewing {formatArtworkTitle(currentArt?.title || '')} like a <span className="text-indigo-300 font-bold">{closestParticle.name}</span> would
+                  </p>
+                  <p className="text-xs text-indigo-200/80 italic">
+                    {closestParticle.description}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Quick Reference Section - Moved to the end */}
           <div className="bg-white/5 rounded-xl p-6 space-y-4 border border-white/10">
             <h4 className="text-sm font-medium text-gray-300">Quick Reference</h4>
             <div className="space-y-2">
@@ -191,35 +236,12 @@ export const Sidebar = () => {
                 >
                   <div className="flex justify-between items-center">
                     <span>{particle.name}</span>
-                    <span className="text-xs opacity-75">{particle.velocity.toFixed(4)}c</span>
+                    <span className="text-xs opacity-75">{formatReferencePrecision(particle.velocity)}</span>
                   </div>
                   <div className="text-xs opacity-75 mt-1">{particle.description}</div>
                 </button>
               ))}
             </div>
-          </div>
-
-          {/* Physics Info Section */}
-          <div className="bg-white/5 rounded-xl p-6 space-y-3 border border-white/10">
-            <p className="text-sm text-gray-300">
-              |v| = {cappedTotalVelocity.toFixed(4)}c → γ = {gamma.toFixed(2)}
-            </p>
-            <p className="text-sm text-gray-300">
-              Contraction: {(1/gamma).toFixed(4)} × original size
-            </p>
-            <p className="text-sm text-gray-300">
-              Doppler factor = {dopplerFactor.toFixed(2)}
-            </p>
-            {totalVelocity > 0.001 && (
-              <div className="pt-3 mt-3 border-t border-white/10">
-                <p className="text-sm text-white">
-                  You&apos;re viewing {formatArtworkTitle(currentArt?.title || '')} like a {closestParticle.name} would
-                </p>
-                <p className="text-xs text-gray-400 mt-1">
-                  {closestParticle.description}
-                </p>
-              </div>
-            )}
           </div>
         </div>
       </div>
